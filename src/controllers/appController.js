@@ -1,4 +1,4 @@
-// World-Class Controllers for Aplikasi Enterprise (Aplikasi Enterprise World-Class Enterprise)
+// World-Class Controllers for Aplikasi Enterprise (Sistem Aplikasi Enterprise Enterprise)
 
 let dataData = [
   {
@@ -6,6 +6,13 @@ let dataData = [
     "judul": "Record Aplikasi Enterprise #1",
     "kategori": "Operasional",
     "nilai": 15000000,
+    "status": "Aktif"
+  },
+  {
+    "id": 2,
+    "judul": "Record Aplikasi Enterprise #2",
+    "kategori": "Pendapatan",
+    "nilai": 8500000,
     "status": "Aktif"
   }
 ];
@@ -54,5 +61,5 @@ exports.deleteTransaksi = async (req, res) => {
 };
 
 exports.getAnalytics = async (req, res) => {
-    res.json({ success: true, platform: 'Aplikasi Enterprise', domain: 'Aplikasi Enterprise World-Class Enterprise', version: '5.0.0-WorldClass', architecture: 'Multi-Tenant Ready + Redis Cache' });
+    res.json({ success: true, platform: 'Aplikasi Enterprise', domain: 'Sistem Aplikasi Enterprise Enterprise', version: '5.0.0-WorldClass', architecture: 'Multi-Tenant Ready + Redis Cache' });
 };
