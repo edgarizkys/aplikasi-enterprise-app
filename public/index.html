@@ -5,202 +5,204 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplikasi Enterprise - Aplikasi Enterprise World-Class Enterprise</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen" x-data="appData()" x-init="initCharts()">
-    <header class="border-b border-slate-800/60 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+<body class="bg-slate-950 text-slate-100">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-600 flex items-center justify-center text-xl shadow-lg">🏢</div>
-                <div><h1 class="text-lg font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Aplikasi Enterprise</h1><p class="text-[10px] text-slate-500">Aplikasi Enterprise World-Class Enterprise | World-Class v5.0</p></div>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-lg shadow-lg">🏢</div>
+                <span class="text-lg font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">Aplikasi Enterprise</span>
             </div>
-            <div class="flex items-center gap-3">
-                <nav class="flex bg-slate-900/80 border border-slate-800 rounded-2xl p-1 text-xs flex-wrap gap-1">
-                    <button @click="activeTab='dashboard'" :class="activeTab==='dashboard'?'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold shadow-lg':'text-slate-400 hover:text-white'" class="px-4 py-2 rounded-xl text-xs transition-all">Dashboard</button>
-                    <button @click="activeTab='data'" :class="activeTab==='data'?' bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold shadow-lg':'text-slate-400 hover:text-white'" class="px-4 py-2 rounded-xl text-xs transition-all">Data Utama</button> <button @click="activeTab='transaksi'" :class="activeTab==='transaksi'?' bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold shadow-lg':'text-slate-400 hover:text-white'" class="px-4 py-2 rounded-xl text-xs transition-all">Transaksi Pembayaran</button>
-                </nav>
-                <button @click="showQrisModal = true" class="px-3 py-1.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 hover:text-white text-[10px] font-semibold rounded-xl flex items-center gap-1.5 transition-colors">
-                    💳 Payment Gateway
-                </button>
+            <div class="flex items-center gap-4">
+                <a href="/login" class="text-sm text-slate-400 hover:text-white transition-colors">Masuk</a>
+                <a href="/login#register" class="px-5 py-2 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white text-sm font-bold rounded-xl hover:opacity-90 transition-all btn-shine magnetic-btn">Daftar Gratis</a>
             </div>
         </div>
-    </header>
-    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-        <div x-show="activeTab==='dashboard'" x-transition class="space-y-6">
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-4"><div class="bg-slate-900/60 border border-slate-800 hover:border-cyan-500/30 p-5 rounded-2xl transition-all"><p class="text-xs text-slate-400 mb-1">Total Data</p><h3 class="text-2xl font-bold text-white" x-text="data.length">0</h3><span class="text-lg">📊</span></div> <div class="bg-slate-900/60 border border-slate-800 hover:border-cyan-500/30 p-5 rounded-2xl transition-all"><p class="text-xs text-slate-400 mb-1">Transaksi</p><h3 class="text-2xl font-bold text-white" x-text="transaksi.length">0</h3><span class="text-lg">💳</span></div></div>
+    </nav>
 
-            <!-- Interactive Analytics Chart Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-2">📊 Grafik Tren Analitik Transaksi & Activity</h3>
-                        <span class="text-[10px] bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 px-2 py-1 rounded-lg">Real-Time Data</span>
-                    </div>
-                    <div class="h-64 relative">
-                        <canvas id="mainAnalyticsChart"></canvas>
-                    </div>
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-indigo-600 rounded-full blur-[128px]"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-600 rounded-full blur-[128px]"></div>
+        </div>
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <div class="reveal">
+                <span class="inline-block px-4 py-1.5 bg-indigo-600/10 border border-indigo-600/30 text-indigo-400 text-xs font-bold rounded-full mb-6">Aplikasi Enterprise World-Class Enterprise</span>
+            </div>
+            <h1 class="reveal delay-1 text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                <span class="gradient-text">Platform Aplikasi Enterprise Modern</span>
+            </h1>
+            <p class="reveal delay-2 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Sistem digital terpadu untuk mengelola operasional aplikasi enterprise dengan efisien dan profesional.
+            </p>
+            <div class="reveal delay-3 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/login" class="px-8 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold text-lg rounded-2xl shadow-2xl hover:opacity-90 transition-all btn-shine magnetic-btn text-center">
+                    Mulai Gratis Sekarang
+                </a>
+                <a href="#features" class="px-8 py-4 bg-slate-900/60 border border-slate-700 text-slate-300 font-bold text-lg rounded-2xl hover:bg-slate-800 transition-all text-center">
+                    Lihat Fitur
+                </a>
+            </div>
+            <div class="reveal delay-4 mt-12 flex justify-center gap-8 text-sm text-slate-500">
+                <span>✓ Gratis untuk selamanya</span>
+                <span>✓ Tanpa kartu kredit</span>
+                <span>✓ Setup 5 menit</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-24 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl md:text-4xl font-extrabold text-white mb-4">Fitur Unggulan</h2>
+                <p class="reveal delay-1 text-slate-400 max-w-xl mx-auto">Semua yang Anda butuhkan untuk mengelola bisnis dalam satu platform</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="reveal delay-1 tilt-card bg-slate-900/60 border border-slate-800 p-6 rounded-2xl text-center hover:border-indigo-500/50 transition-all">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Dashboard Analitik</h3>
+                    <p class="text-sm text-slate-400">Grafik real-time dan laporan otomatis</p>
                 </div>
-                <div class="bg-slate-900/60 border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-sm font-bold text-white mb-4">🛡️ World-Class Architecture</h3>
-                        <div class="space-y-3 text-xs">
-                            <div class="flex justify-between"><span class="text-slate-400">Rate Limiter</span><span class="text-emerald-400 font-bold">100 req/min Active</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Payment Gateway</span><span class="text-indigo-400 font-bold">QRIS + VA Ready</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Multi-Tenancy</span><span class="text-cyan-400 font-bold">Enabled</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">Unit Tests</span><span class="text-emerald-400 font-bold">100% Coverage</span></div>
-                            <div class="flex justify-between"><span class="text-slate-400">DB Engine</span><span class="text-white">Turso Cloud SQLite</span></div>
+                <div class="reveal delay-2 tilt-card bg-slate-900/60 border border-slate-800 p-6 rounded-2xl text-center hover:border-indigo-500/50 transition-all">
+                    <div class="text-4xl mb-4">💳</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Pembayaran Digital</h3>
+                    <p class="text-sm text-slate-400">QRIS, VA Bank, dan integrasi payment gateway</p>
+                </div>
+                <div class="reveal delay-3 tilt-card bg-slate-900/60 border border-slate-800 p-6 rounded-2xl text-center hover:border-indigo-500/50 transition-all">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Manajemen Data</h3>
+                    <p class="text-sm text-slate-400">CRUD lengkap dengan pencarian dan filter</p>
+                </div>
+                <div class="reveal delay-4 tilt-card bg-slate-900/60 border border-slate-800 p-6 rounded-2xl text-center hover:border-indigo-500/50 transition-all">
+                    <div class="text-4xl mb-4">📤</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Export Laporan</h3>
+                    <p class="text-sm text-slate-400">Export CSV, PDF, dan cetak laporan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="py-24 px-4 bg-slate-900/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl md:text-4xl font-extrabold text-white mb-4">Cara Kerja</h2>
+                <p class="reveal delay-1 text-slate-400">Mulai dalam 3 langkah mudah</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="reveal delay-1 text-center space-y-4">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">1</div>
+                    <h3 class="text-lg font-bold text-white">Daftar Akun</h3>
+                    <p class="text-sm text-slate-400">Buat akun gratis dalam hitungan detik</p>
+                </div>
+                <div class="reveal delay-2 text-center space-y-4">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">2</div>
+                    <h3 class="text-lg font-bold text-white">Setup Data</h3>
+                    <p class="text-sm text-slate-400">Masukkan data produk, layanan, atau anggota</p>
+                </div>
+                <div class="reveal delay-3 text-center space-y-4">
+                    <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">3</div>
+                    <h3 class="text-lg font-bold text-white">Mulai Operasi</h3>
+                    <p class="text-sm text-slate-400">Langsung gunakan fitur lengkap sistem</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl md:text-4xl font-extrabold text-white mb-4">Kata Mereka</h2>
+                <p class="reveal delay-1 text-slate-400">Testimoni dari pengguna aktif</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="reveal delay-1 glass tilt-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-xl font-bold text-white">P</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Pengguna Setia</div>
+                            <div class="text-xs text-slate-400">Business Owner</div>
                         </div>
                     </div>
-                    <div class="pt-4 border-t border-slate-800/80">
-                        <button @click="window.print()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs py-2 rounded-xl border border-slate-700 transition-all">
-                            🖨️ Cetak Laporan PDF
-                        </button>
-                    </div>
+                    <p class="text-sm text-slate-300 italic">"Aplikasi ini sangat membantu mengelola bisnis saya sehari-hari."</p>
                 </div>
             </div>
         </div>
-        
-        <div x-show="activeTab==='data'" x-transition class="space-y-4">
-            <div class="flex justify-between items-center flex-wrap gap-2">
-                <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>🏢</span> Data Utama</h2>
-                <div class="flex items-center gap-2">
-                    <button @click="exportCsv('data')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs px-4 py-2 rounded-xl transition-all border border-slate-700 flex items-center gap-1.5">
-                        <span>📥</span> Export CSV
-                    </button>
-                    <button @click="showAdd=true;addTarget='data'" class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold text-xs px-5 py-2 rounded-xl shadow-lg hover:scale-105 transition-all flex items-center gap-1.5">
-                        <span>+</span> Tambah Data
-                    </button>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-24 px-4 bg-slate-900/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-3xl md:text-4xl font-extrabold text-white mb-4">Harga Terjangkau</h2>
+                <p class="reveal delay-1 text-slate-400">Pilih plan yang sesuai kebutuhan Anda</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="reveal delay-1 relative border-slate-800 bg-slate-900/60 border p-6 rounded-2xl space-y-4">
+                    
+                    <div class="text-sm font-bold text-slate-400">Starter</div>
+                    <div class="text-3xl font-bold text-white">Gratis<span class="text-sm font-normal text-slate-400"> </span></div>
+                    <ul class="space-y-2 py-4"><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Fitur Dasar</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> 1 User</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Support Email</li></ul>
+                    <a href="/login" class="block w-full py-3 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-xl font-bold text-sm text-center transition-all btn-shine">Mulai Sekarang</a>
+                </div>
+                <div class="reveal delay-2 relative border-indigo-500/50 shadow-2xl bg-slate-900/60 border p-6 rounded-2xl space-y-4">
+                    <span class="absolute top-3 right-3 text-[10px] bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold px-3 py-1 rounded-full">POPULER</span>
+                    <div class="text-sm font-bold text-slate-400">Pro</div>
+                    <div class="text-3xl font-bold text-white">Rp 149rb/bulan<span class="text-sm font-normal text-slate-400"> /bulan</span></div>
+                    <ul class="space-y-2 py-4"><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Semua Fitur</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Multi-User</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Priority Support</li></ul>
+                    <a href="/login" class="block w-full py-3 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-lg rounded-xl font-bold text-sm text-center transition-all btn-shine">Mulai Sekarang</a>
+                </div>
+                <div class="reveal delay-3 relative border-slate-800 bg-slate-900/60 border p-6 rounded-2xl space-y-4">
+                    
+                    <div class="text-sm font-bold text-slate-400">Enterprise</div>
+                    <div class="text-3xl font-bold text-white">Rp 399rb/bulan<span class="text-sm font-normal text-slate-400"> /bulan</span></div>
+                    <ul class="space-y-2 py-4"><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Custom Modul</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> API Access</li><li class="flex items-center gap-2 text-sm text-slate-300"><span class="text-emerald-400">✓</span> Dedicated Support</li></ul>
+                    <a href="/login" class="block w-full py-3 bg-slate-800 text-slate-300 hover:bg-slate-700 rounded-xl font-bold text-sm text-center transition-all btn-shine">Mulai Sekarang</a>
                 </div>
             </div>
-            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <table class="w-full text-xs">
-                    <thead class="bg-slate-950/80 text-slate-400 uppercase border-b border-slate-800"><tr><th class="p-3">#</th><th class="p-3 text-left">Judul</th><th class="p-3 text-left">Kategori</th><th class="p-3 text-left">Nilai (Rp)</th><th class="p-3 text-left">Status</th><th class="p-3 text-center">Aksi</th></tr></thead>
-                    <tbody class="divide-y divide-slate-800/50">
-                        <template x-for="(item, idx) in data" :key="item.id">
-                            <tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3 text-slate-500" x-text="idx+1"></td><td class="p-3" x-text="item.judul"></td><td class="p-3" x-text="item.kategori"></td><td class="p-3" x-text="item.nilai"></td><td class="p-3" x-text="item.status"></td><td class="p-3 text-center"><button @click="data.splice(idx,1)" class="text-red-400 hover:text-red-300 text-xs font-bold hover:bg-red-500/10 px-2.5 py-1 rounded-lg transition-colors">Hapus</button></td></tr>
-                        </template>
-                    </tbody>
-                </table>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-4">
+        <div class="max-w-3xl mx-auto text-center reveal-scale">
+            <div class="glass p-12 rounded-3xl border border-indigo-600/20 glow-pulse">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Siap Memulai?</h2>
+                <p class="text-slate-400 mb-8">Daftar sekarang dan rasakan kemudahannya</p>
+                <a href="/login" class="inline-block px-10 py-4 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold text-lg rounded-2xl shadow-2xl hover:opacity-90 transition-all btn-shine magnetic-btn">
+                    Daftar Gratis
+                </a>
             </div>
         </div>
-        <div x-show="activeTab==='transaksi'" x-transition class="space-y-4">
-            <div class="flex justify-between items-center flex-wrap gap-2">
-                <h2 class="text-lg font-bold text-white flex items-center gap-2"><span>🏢</span> Transaksi Pembayaran</h2>
-                <div class="flex items-center gap-2">
-                    <button @click="exportCsv('transaksi')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs px-4 py-2 rounded-xl transition-all border border-slate-700 flex items-center gap-1.5">
-                        <span>📥</span> Export CSV
-                    </button>
-                    <button @click="showAdd=true;addTarget='transaksi'" class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold text-xs px-5 py-2 rounded-xl shadow-lg hover:scale-105 transition-all flex items-center gap-1.5">
-                        <span>+</span> Tambah Data
-                    </button>
-                </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/40 py-12 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-sm">🏢</div>
+                <span class="text-sm font-bold text-slate-400">Aplikasi Enterprise</span>
             </div>
-            <div class="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
-                <table class="w-full text-xs">
-                    <thead class="bg-slate-950/80 text-slate-400 uppercase border-b border-slate-800"><tr><th class="p-3">#</th><th class="p-3 text-left">No. Invoice</th><th class="p-3 text-left">Deskripsi</th><th class="p-3 text-left">Total (Rp)</th><th class="p-3 text-left">Metode Bayar</th><th class="p-3 text-left">Status</th><th class="p-3 text-center">Aksi</th></tr></thead>
-                    <tbody class="divide-y divide-slate-800/50">
-                        <template x-for="(item, idx) in transaksi" :key="item.id">
-                            <tr class="hover:bg-slate-800/30 transition-colors"><td class="p-3 text-slate-500" x-text="idx+1"></td><td class="p-3" x-text="item.invoice"></td><td class="p-3" x-text="item.deskripsi"></td><td class="p-3" x-text="item.total"></td><td class="p-3" x-text="item.metode"></td><td class="p-3" x-text="item.status"></td><td class="p-3 text-center"><button @click="transaksi.splice(idx,1)" class="text-red-400 hover:text-red-300 text-xs font-bold hover:bg-red-500/10 px-2.5 py-1 rounded-lg transition-colors">Hapus</button></td></tr>
-                        </template>
-                    </tbody>
-                </table>
+            <div class="flex gap-6 text-sm text-slate-500">
+                <a href="#features" class="hover:text-white transition-colors">Fitur</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Harga</a>
+                <a href="/login" class="hover:text-white transition-colors">Masuk</a>
             </div>
+            <div class="text-xs text-slate-600">&copy; 2026 Aplikasi Enterprise. Built by E.D.G.A.R.</div>
         </div>
-    </main>
+    </footer>
 
-    <!-- Payment QRIS Modal -->
-    <div x-show="showQrisModal" style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl max-w-sm w-full space-y-4 text-center shadow-2xl" @click.away="showQrisModal=false">
-            <h3 class="text-base font-bold text-white">💳 Midtrans / Xendit QRIS Gateway</h3>
-            <p class="text-xs text-slate-400">Scan QRIS di bawah ini untuk transaksi tes instan:</p>
-            <div class="p-3 bg-white rounded-2xl inline-block shadow-lg">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=00020101021226680016ID.CO.QRIS.WWW01189360050300000894045204581253033605802ID5913EDGARTECH6013BEKASI61051711162070703A016304C74B" class="w-44 h-44 mx-auto">
-            </div>
-            <p class="text-[11px] text-emerald-400 font-mono font-bold">Status: Ready for Live Scan</p>
-            <button @click="showQrisModal=false" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs py-2.5 rounded-xl transition-all">Tutup Modal</button>
-        </div>
-    </div>
-
-    <!-- Add Item Modal -->
-    <div x-show="showAdd" style="display:none" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl max-w-md w-full space-y-4 shadow-2xl" @click.away="showAdd=false">
-            <h3 class="text-base font-bold text-white" x-text="'Tambah Data ' + addTarget">Tambah</h3>
-            <div class="space-y-3 max-h-[60vh] overflow-y-auto"><div x-show="addTarget==='data'"><label class="block text-slate-400 text-xs mb-1">Judul</label><input x-model="newItem.judul" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Judul"></div><div x-show="addTarget==='data'"><label class="block text-slate-400 text-xs mb-1">Kategori</label><input x-model="newItem.kategori" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Kategori"></div><div x-show="addTarget==='data'"><label class="block text-slate-400 text-xs mb-1">Nilai (Rp)</label><input x-model="newItem.nilai" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Nilai (Rp)"></div><div x-show="addTarget==='data'"><label class="block text-slate-400 text-xs mb-1">Status</label><input x-model="newItem.status" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Status"></div><div x-show="addTarget==='transaksi'"><label class="block text-slate-400 text-xs mb-1">No. Invoice</label><input x-model="newItem.invoice" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="No. Invoice"></div><div x-show="addTarget==='transaksi'"><label class="block text-slate-400 text-xs mb-1">Deskripsi</label><input x-model="newItem.deskripsi" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Deskripsi"></div><div x-show="addTarget==='transaksi'"><label class="block text-slate-400 text-xs mb-1">Total (Rp)</label><input x-model="newItem.total" type="number" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Total (Rp)"></div><div x-show="addTarget==='transaksi'"><label class="block text-slate-400 text-xs mb-1">Metode Bayar</label><input x-model="newItem.metode" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Metode Bayar"></div><div x-show="addTarget==='transaksi'"><label class="block text-slate-400 text-xs mb-1">Status</label><input x-model="newItem.status" type="text" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-white text-xs focus:outline-none focus:border-cyan-500" placeholder="Status"></div></div>
-            <div class="flex gap-2 pt-2">
-                <button @click="saveItem()" class="flex-1 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white font-bold text-xs py-2.5 rounded-xl shadow-lg">Simpan</button>
-                <button @click="showAdd=false" class="bg-slate-800 text-slate-300 font-bold text-xs px-5 py-2.5 rounded-xl">Batal</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="border-t border-slate-800/40 py-6 text-center text-[10px] text-slate-600">Aplikasi Enterprise v5.0 World-Class &mdash; Built by E.D.G.A.R Senior Principal Engineer Agent &mdash; EdgarTech Corp &copy; 2026</footer>
-
-    <script>
-        function appData() {
-            return {
-                activeTab: 'dashboard',
-                showAdd: false,
-                showQrisModal: false,
-                addTarget: 'data',
-                newItem: {},
-            data: [{"id": 1, "judul": "Record Aplikasi Enterprise #1", "kategori": "Operasional", "nilai": 15000000, "status": "Aktif"}],
-            transaksi: [{"id": 1, "invoice": "INV-20260724-001", "deskripsi": "Pembayaran Layanan", "total": 2500000, "metode": "QRIS Gateway", "status": "Success"}],
-                initCharts() {
-                    setTimeout(() => {
-                        const ctx = document.getElementById('mainAnalyticsChart');
-                        if (ctx) {
-                            new Chart(ctx, {
-                                type: 'line',
-                                data: {
-                                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul'],
-                                    datasets: [{
-                                        label: 'Volume Transaksi (Aktivitas)',
-                                        data: [12, 19, 28, 35, 42, 58, 75],
-                                        borderColor: '#06b6d4',
-                                        backgroundColor: 'rgba(6, 182, 212, 0.15)',
-                                        fill: true,
-                                        tension: 0.4
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: { legend: { labels: { color: '#94a3b8' } } },
-                                    scales: {
-                                        x: { grid: { color: 'rgba(51, 65, 85, 0.3)' }, ticks: { color: '#94a3b8' } },
-                                        y: { grid: { color: 'rgba(51, 65, 85, 0.3)' }, ticks: { color: '#94a3b8' } }
-                                    }
-                                }
-                            });
-                        }
-                    }, 300);
-                },
-                exportCsv(entityName) {
-                    const data = this[entityName];
-                    if (!data || !data.length) return alert('Tidak ada data untuk diexport');
-                    const headers = Object.keys(data[0]).join(',');
-                    const rows = data.map(obj => Object.values(obj).join(',')).join('\n');
-                    const csvContent = "data:text/csv;charset=utf-8," + headers + "\n" + rows;
-                    const encodedUri = encodeURI(csvContent);
-                    const link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", entityName + "_export.csv");
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                },
-                saveItem() {
-                    if (this.addTarget === "data") { this.data.unshift({ id: Date.now(), ...this.newItem });
-                    } else if (this.addTarget === "transaksi") { this.transaksi.unshift({ id: Date.now(), ...this.newItem });
-                    }
-                    this.newItem = {};
-                    this.showAdd = false;
-                }
-            }
-        }
-    </script>
+    <script src="/app.js"></script>
 </body>
 </html>
