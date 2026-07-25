@@ -1,7 +1,7 @@
 {
   "name": "aplikasi-enterprise-app",
   "version": "5.0.0-worldclass",
-  "description": "Aplikasi Enterprise - Aplikasi Enterprise World-Class Enterprise",
+  "description": "Aplikasi Enterprise - Sistem Aplikasi Enterprise Enterprise",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
