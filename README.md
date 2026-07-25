@@ -1,6 +1,6 @@
 # Aplikasi Enterprise
 
-🏢 Aplikasi Enterprise World-Class Enterprise - World-Class Enterprise v5.0
+ðŸ¢ Sistem Aplikasi Enterprise Enterprise - World-Class Enterprise v5.0
 
 ## Pages
 - **/** - Landing Page (Marketing, Hero, Features, Pricing, Testimonials)
